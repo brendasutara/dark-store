@@ -1,52 +1,52 @@
 import { NavLink } from "react-router-dom"
 
 function Navbar() {
-    const activeStyle = 'underline underline-offset-4'
+    const activeStyle = 'rounded-lg underline underline-offset-4'
 
     return (
-        <nav className="flex justify-between items-center fixed top-0 z-10 w-full bg-slate-900 py-6 px-32">
+        <nav className="flex justify-between items-center fixed top-0 z-20 w-full bg-slate-900 py-2 px-32">
             <ul className="flex gap-x-4 items-center">
                 <li>
                     <NavLink to='/'>
                         Mercato
                     </NavLink>
                 </li>
-                <li>
+                <li className="rounded-lg p-2 hover:bg-slate-800">
                     <NavLink to='/' className={({ isActive }) =>
                         isActive ? activeStyle : undefined
                     }>
                         All
                     </NavLink>
                 </li>
-                <li>
+                <li className="rounded-lg p-2 hover:bg-slate-800">
                     <NavLink to='/clothes' className={({ isActive }) =>
                         isActive ? activeStyle : undefined
                     }>
                         Clothes
                     </NavLink>
                 </li>
-                <li>
+                <li className="rounded-lg p-2 hover:bg-slate-800">
                     <NavLink to='/electronics' className={({ isActive }) =>
                         isActive ? activeStyle : undefined
                     }>
                         Electronics
                     </NavLink>
                 </li>
-                <li>
+                <li className="rounded-lg p-2 hover:bg-slate-800">
                     <NavLink to='/furniture' className={({ isActive }) =>
                         isActive ? activeStyle : undefined
                     }>
                         Furniture
                     </NavLink>
                 </li>
-                <li>
+                <li className="rounded-lg p-2 hover:bg-slate-800">
                     <NavLink to='/shoes' className={({ isActive }) =>
                         isActive ? activeStyle : undefined
                     }>
                         Shoes
                     </NavLink>
                 </li>
-                <li>
+                <li className="rounded-lg p-2 hover:bg-slate-800">
                     <NavLink to='/miscellaneous' className={({ isActive }) =>
                         isActive ? activeStyle : undefined
                     }>
@@ -56,21 +56,21 @@ function Navbar() {
             </ul>
             <ul className="flex gap-x-4 items-center">
                 <li>Brenda Sutara</li>
-                <li>
+                <li className="rounded-lg p-2 hover:bg-slate-800">
                     <NavLink to='/my-orders' className={({ isActive }) =>
                         isActive ? activeStyle : undefined
                     }>
                         My orders
                     </NavLink>
                 </li>
-                <li>
+                <li className="rounded-lg p-2 hover:bg-slate-800">
                     <NavLink to='/my-account' className={({ isActive }) =>
                         isActive ? activeStyle : undefined
                     }>
                         My account
                     </NavLink>
                 </li>
-                <li>
+                <li className="rounded-lg p-2 hover:bg-slate-800">
                     <NavLink to='/sign-in' className={({ isActive }) =>
                         isActive ? activeStyle : undefined
                     }>

@@ -1,10 +1,18 @@
+import Card from "../../Components/Card"
+import Header from "../../Components/Header"
 import Layout from "../../Components/Layout"
+
+
 
 function Home() {
   return (
-    <Layout>
-      Home esta es el inicio
-    </Layout>
+    <div>
+      <Layout>
+        <Header />
+        <Card />
+      </Layout>
+
+    </div>
   )
 }
 
