@@ -1,6 +1,8 @@
+import Layout from "../../Components/Layout";
+
 function MyAccount() {
   return (
-    <div className='text-pink-400'>MyAccount</div>
+    <Layout>MyAccount</Layout>
   )
 }
 
