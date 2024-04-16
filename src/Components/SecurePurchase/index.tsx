@@ -1,6 +1,6 @@
 function SecurePurchase() {
     return (
-        <section className="flex flex-col md:flex-row md:flex max-w-screen-xl items-center mx-auto md:space-x-44 py-10 opacity-60">
+        <section className="flex flex-col md:flex-row md:flex max-w-screen-xl items-center justify-between mx-auto md:space-x-8 lg:space-x-44 py-10 opacity-60 gap-5 px-2">
             <div className="flex flex-col justify-center items-center md:gap-y-2">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="0.5" stroke="currentColor" className="size-20">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
