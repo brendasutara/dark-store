@@ -56,12 +56,12 @@ function Home() {
               onClick={handleShowMoreClick}
               className="flex flex-col justify-center items-center opacity-60 font-medium text-lg hover:opacity-100"
             >
-              <p>Ver más</p>
+              <p className="uppercase font-normal">I want to see more products</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                strokeWidth="1.5"
+                strokeWidth="1"
                 stroke="currentColor"
                 className="size-12"
               >
