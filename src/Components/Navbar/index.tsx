@@ -6,7 +6,7 @@ function Navbar() {
     return (
         <nav className="flex justify-between items-center fixed top-0 z-20 w-full bg-slate-900 py-2 px-32">
             <ul className="flex gap-x-4 items-center">
-                <li>
+                <li className="text-bold text-2xl">
                     <NavLink to='/'>
                         Mercato
                     </NavLink>
