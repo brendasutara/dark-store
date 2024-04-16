@@ -136,11 +136,6 @@ function Navbar() {
               </NavLink>
             </li>
             <li className="rounded-lg p-2 hover:bg-slate-800">
-              <NavLink to="/toys" className={({ isActive }) => (isActive ? activeStyle : undefined)}>
-                Toys
-              </NavLink>
-            </li>
-            <li className="rounded-lg p-2 hover:bg-slate-800">
               <NavLink to="/miscellaneous" className={({ isActive }) => (isActive ? activeStyle : undefined)}>
                 Miscellaneous
               </NavLink>

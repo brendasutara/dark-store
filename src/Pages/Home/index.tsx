@@ -4,6 +4,7 @@ import Categories from "../../Components/Categories";
 import Header from "../../Components/Header";
 import Layout from "../../Components/Layout";
 import { Product } from "../../Models/Products";
+import SecurePurchase from "../../Components/SecurePurchase";
 
 function Home() {
   const [items, setItems] = useState<Product[]>([]);
@@ -74,6 +75,7 @@ function Home() {
             </button>
           </div>
         )}
+        <SecurePurchase />
       </Layout>
     </div>
   );
