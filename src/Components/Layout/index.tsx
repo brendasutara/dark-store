@@ -6,7 +6,7 @@ interface LayoutProps {
 
 function Layout({ children }: LayoutProps) {
     return (
-        <div className="flex flex-col justify-center">
+        <div className='flex flex-col justify-center'>
             {children}
         </div>
     )
