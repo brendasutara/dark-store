@@ -5,6 +5,7 @@ import Header from '../../Components/Header';
 import Layout from '../../Components/Layout';
 import { Product } from '../../Models/Products';
 import SecurePurchase from '../../Components/SecurePurchase';
+import { ChevronDownIcon } from '@heroicons/react/24/outline'
 
 function Home() {
   const [items, setItems] = useState<Product[]>([]);
@@ -58,20 +59,7 @@ function Home() {
               className='flex flex-col justify-center items-center opacity-60 font-medium text-lg hover:opacity-100'
             >
               <p className='uppercase font-normal'>I want to see more products</p>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                strokeWidth='1'
-                stroke='currentColor'
-                className='size-12'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='m19.5 8.25-7.5 7.5-7.5-7.5'
-                />
-              </svg>
+              <ChevronDownIcon className='size-12' />
             </button>
           </div>
         )}
