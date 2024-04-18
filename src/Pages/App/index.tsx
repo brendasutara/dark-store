@@ -6,9 +6,9 @@ import MyOrders from '../MyOrders'
 import NotFound from '../NotFound'
 import SignIn from '../SignIn'
 import Navbar from '../../Components/Navbar/index'
-import './App.css'
 import Footer from '../../Components/Footer'
 import ShoppingCartProvider from '../../Context'
+import './App.css'
 
 const AppRoutes = () => {
   const routes = useRoutes([
