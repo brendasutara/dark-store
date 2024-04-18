@@ -1,8 +1,7 @@
 import { useContext } from 'react'
 import { Product } from '../../Models/Products'
 import { ShoppingCartContext } from '../../Context'
-import { ShoppingCartIcon } from '@heroicons/react/24/outline'
-import { HeartIcon } from '@heroicons/react/24/outline'
+import { ShoppingCartIcon, HeartIcon } from '@heroicons/react/24/outline'
 
 function Card(data: Product) {
     const context = useContext(ShoppingCartContext)!;

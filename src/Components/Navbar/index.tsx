@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import { Collapse } from 'flowbite';
 import type { CollapseInterface } from 'flowbite';
 import { ShoppingCartContext } from '../../Context';
-
 import { ShoppingCartIcon } from '@heroicons/react/24/outline'
 
 function Navbar() {

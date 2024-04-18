@@ -7,16 +7,26 @@ type Props = {
 type ShoppingCartContextType = {
     count: number,
     setCount: Dispatch<SetStateAction<number>>,
+    isProductDetailOpen: boolean,
+    setIsProductDetailOpen: Dispatch<SetStateAction<boolean>>
 };
 
 export const ShoppingCartContext = createContext<ShoppingCartContextType | null>(null);
 
 export const ShoppingCartProvider: React.FC<Props> = ({ children }: Props) => {
     const [count, setCount] = useState<number>(0);
-    console.log('Count:', count)
+    const [isProductDetailOpen, setIsProductDetailOpen] = useState<boolean>(false)
+    const openProductDetail = () => setIsProductDetailOpen(true)
+    const closeProductDetail = () => setIsProductDetailOpen(false)
 
     return (
-        <ShoppingCartContext.Provider value={{ count, setCount }}>
+        <ShoppingCartContext.Provider value={{
+            count,
+            setCount,
+            isProductDetailOpen,
+            openProductDetail,
+            closeProductDetail,
+        }}>
             {children}
         </ShoppingCartContext.Provider>
     );

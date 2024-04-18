@@ -6,6 +6,7 @@ import Layout from '../../Components/Layout';
 import { Product } from '../../Models/Products';
 import SecurePurchase from '../../Components/SecurePurchase';
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
+import ProductDetail from '../../Components/ProductDetail';
 
 function Home() {
   const [items, setItems] = useState<Product[]>([]);
@@ -63,6 +64,7 @@ function Home() {
             </button>
           </div>
         )}
+        <ProductDetail />
         <SecurePurchase />
       </Layout>
     </div>
