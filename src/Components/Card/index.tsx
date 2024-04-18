@@ -10,8 +10,14 @@ function Card(data: Product) {
         context.setCount(prevCount => prevCount + 1);
     };
 
+    const handleOpen = () => {
+        context.handleOpen();
+    };
+
     return (
-        <div className='hover:bg-slate-900 cursor-pointer border-slate-800 flex-wrap gap-4 p-2 border justify-center items-center w-full max-w-sm rounded-lg shadow'>
+        <div
+            onClick={handleOpen}
+            className='hover:bg-slate-900 cursor-pointer border-slate-800 flex-wrap gap-4 p-2 border justify-center items-center w-full max-w-sm rounded-lg shadow'>
             <a href='#'>
                 <figure className='relative'>
                     <img className='rounded-lg' src={data.images[0]} alt='product image' />

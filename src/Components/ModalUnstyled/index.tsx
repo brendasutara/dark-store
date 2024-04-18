@@ -4,8 +4,9 @@ import clsx from 'clsx';
 import { styled, css } from '@mui/system';
 import { Modal as BaseModal } from '@mui/base/Modal';
 import ChevronRightIcon from '@heroicons/react/24/outline/ChevronRightIcon';
+import XMarkIcon from '@heroicons/react/24/outline/XMarkIcon';
 import Carrousel from '../Carrousel';
-import Card from '../Card';
+import { ShoppingCartContext } from '../../Context';
 
 const slides: string[] = [
     'https://i.pinimg.com/564x/0f/d3/14/0fd314c45956a78bd3ef7d164b44ee8a.jpg',
@@ -14,30 +15,28 @@ const slides: string[] = [
 ]
 
 export default function ModalUnstyled() {
-    const [open, setOpen] = React.useState<boolean>(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const context = React.useContext(ShoppingCartContext)!;
 
     const [curr, setCurr] = React.useState(0);
 
     return (
         <div>
-            <TriggerButton type="button" onClick={handleOpen}>
-                Open modal
-            </TriggerButton>
             <Modal
                 aria-labelledby="unstyled-modal-title"
                 aria-describedby="unstyled-modal-description"
-                open={open}
-                onClose={handleClose}
+                open={context.open}
+                onClose={context.handleClose}
                 slots={{ backdrop: StyledBackdrop }}
             >
                 <ModalContent sx={{ width: 800 }}>
-                    <section className='grid grid-cols-2 mx-auto product-detail text-white'>
-                        <div className='w-full bg-slate-800'>
+                    <section className='overflow-y-auto h-screen md:h-4/5 grid grid-cols-1 md:grid-cols-2 mx-auto product-detail text-white'>
+                        <div className='w-full bg-slate-800 order-last md:order-none'>
                             <Carrousel slides={slides} curr={curr} setCurr={setCurr} />
                         </div>
-                        <div className='flex flex-col bg-slate-800 w-full p-10'>
+                        <div className='flex flex-col bg-slate-800 w-full p-6'>
+                            <div onClick={context.handleClose} className='flex justify-end'>
+                                <XMarkIcon className='rounded-full p-1 w-8 opacity-60 hover:opacity-100 hover:bg-white/10 cursor-pointer' />
+                            </div>
                             <div className='flex opacity-60'>
                                 <h3>Home</h3>
                                 <ChevronRightIcon className='w-4' />
@@ -74,28 +73,6 @@ Backdrop.propTypes = {
     open: PropTypes.bool,
 };
 
-const blue = {
-    200: '#99CCFF',
-    300: '#66B2FF',
-    400: '#3399FF',
-    500: '#007FFF',
-    600: '#0072E5',
-    700: '#0066CC',
-};
-
-const grey = {
-    50: '#F3F6F9',
-    100: '#E5EAF2',
-    200: '#DAE2ED',
-    300: '#C7D0DD',
-    400: '#B0B8C4',
-    500: '#9DA8B7',
-    600: '#6B7A90',
-    700: '#434D5B',
-    800: '#303740',
-    900: '#1C2025',
-};
-
 const Modal = styled(BaseModal)`
   position: fixed;
   z-index: 1300;
@@ -123,12 +100,9 @@ const ModalContent = styled('div')(
         flex-direction: column;
         gap: 8px;
         overflow: hidden;
-        background-color: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
         border-radius: 8px;
         box-shadow: 0 4px 12px
             ${theme.palette.mode === 'dark' ? 'rgba(0, 0, 0, 0.5)' : 'rgba(0, 0, 0, 0.2)'};
-        
-        color: ${theme.palette.mode === 'dark' ? grey[50] : grey[900]};
 
         & .modal-title {
             margin: 0;
@@ -140,39 +114,13 @@ const ModalContent = styled('div')(
             margin: 0;
             line-height: 1.5rem;
             font-weight: 400;
-            color: ${theme.palette.mode === 'dark' ? grey[400] : grey[800]};
             margin-bottom: 4px;
         }
-    `,
-);
 
-const TriggerButton = styled('button')(
-    ({ theme }) => css`
-        font-family: 'IBM Plex Sans', sans-serif;
-        font-weight: 600;
-        font-size: 0.875rem;
-        line-height: 1.5;
-        padding: 8px 16px;
-        border-radius: 8px;
-        transition: all 150ms ease;
-        cursor: pointer;
-        background: ${theme.palette.mode === 'dark' ? grey[900] : '#fff'};
-        border: 1px solid ${theme.palette.mode === 'dark' ? grey[700] : grey[200]};
-        color: ${theme.palette.mode === 'dark' ? grey[200] : grey[900]};
-        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-
-        &:hover {
-            background: ${theme.palette.mode === 'dark' ? grey[800] : grey[50]};
-            border-color: ${theme.palette.mode === 'dark' ? grey[600] : grey[300]};
-        }
-
-        &:active {
-            background: ${theme.palette.mode === 'dark' ? grey[700] : grey[100]};
-        }
-
-        &:focus-visible {
-            box-shadow: 0 0 0 4px ${theme.palette.mode === 'dark' ? blue[300] : blue[200]};
-            outline: none;
+        @media screen and (max-width: 600px) {
+            width: 100vw;
+            height: auto;
+            border-radius: 0;
         }
     `,
 );

@@ -24,7 +24,7 @@ function Carrousel({ slides, curr, setCurr }: CarrouselProps) {
           <button
             key={index}
             onClick={() => setCurr(index)}
-            className={`mx-1 mb-3 size-3 rounded-full ${index === curr ? 'bg-rose-400' : 'bg-gray-300'}`}
+            className={`mx-1 mb-3 size-2 rounded-full ${index === curr ? 'bg-rose-400' : 'bg-gray-300'}`}
           />
         ))}
       </div>
@@ -32,13 +32,13 @@ function Carrousel({ slides, curr, setCurr }: CarrouselProps) {
         <button
           onClick={prev}
           className="p-1 rounded-full hover:bg-slate-400/50">
-          <ChevronLeftIcon className="w-12" />
+          <ChevronLeftIcon className="w-8" />
         </button>
 
         <button
           onClick={next}
           className="p-1 rounded-full hover:bg-slate-400/50">
-          <ChevronRightIcon className="w-12" />
+          <ChevronRightIcon className="w-8" />
         </button>
       </div>
     </div>
