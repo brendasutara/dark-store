@@ -8,14 +8,9 @@ import XMarkIcon from '@heroicons/react/24/outline/XMarkIcon';
 import Carrousel from '../Carrousel';
 import { ShoppingCartContext } from '../../Context';
 
-const slides: string[] = [
-    'https://i.pinimg.com/564x/0f/d3/14/0fd314c45956a78bd3ef7d164b44ee8a.jpg',
-    'https://i.pinimg.com/564x/9d/48/ff/9d48ff960e029a47366c9f12d66f8a6c.jpg',
-    'https://i.pinimg.com/564x/4c/e0/a3/4ce0a3598143fd2293ac272a13f80e4c.jpg'
-]
-
 export default function ModalUnstyled() {
     const context = React.useContext(ShoppingCartContext)!;
+    console.log('PRODUCT TO SHOW: ', context.productToShow)
 
     const [curr, setCurr] = React.useState(0);
 
@@ -28,26 +23,26 @@ export default function ModalUnstyled() {
                 onClose={context.handleClose}
                 slots={{ backdrop: StyledBackdrop }}
             >
-                <ModalContent sx={{ width: 800 }}>
+                <ModalContent sx={{ width: 1000 }}>
                     <section className='overflow-y-auto h-screen md:h-4/5 grid grid-cols-1 md:grid-cols-2 mx-auto product-detail text-white'>
                         <div className='w-full bg-slate-800 order-last md:order-none'>
-                            <Carrousel slides={slides} curr={curr} setCurr={setCurr} />
+                            <Carrousel slides={context.productToShow[0]?.images} curr={curr} setCurr={setCurr} />
                         </div>
                         <div className='flex flex-col bg-slate-800 w-full p-6'>
                             <div onClick={context.handleClose} className='flex justify-end'>
                                 <XMarkIcon className='rounded-full p-1 w-8 opacity-60 hover:opacity-100 hover:bg-white/10 cursor-pointer' />
                             </div>
-                            <div className='flex opacity-60'>
+                            <div className='flex flex-wrap opacity-60'>
                                 <h3>Home</h3>
                                 <ChevronRightIcon className='w-4' />
-                                <h3>Categoría</h3>
+                                <h3>{context.productToShow[0]?.category.name}</h3>
                                 <ChevronRightIcon className='w-4' />
-                                <h3>Product Detail</h3>
+                                <h3>{context.productToShow[0]?.title}</h3>
                             </div>
                             <div className='py-20 space-y-6'>
-                                <h2 className='text-2xl'>Nombre del producto</h2>
-                                <p className='opacity-60'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum consequatur, ex molestiae fuga corrupti consequuntur doloribus deleniti, aperiam maxime quibusdam culpa illum at, quaerat recusandae impedit non minus incidunt. Aperiam.</p>
-                                <h2 className='text-4xl'>$4.500</h2>
+                                <h2 className='text-2xl'>{context.productToShow[0]?.title}</h2>
+                                <p className='opacity-60'>{context.productToShow[0]?.description}</p>
+                                <h2 className='text-4xl'>${context.productToShow[0]?.price}</h2>
                             </div>
                         </div>
                     </section>
