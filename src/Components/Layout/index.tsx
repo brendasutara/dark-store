@@ -1,4 +1,6 @@
 import { ReactNode } from 'react';
+import Navbar from '../Navbar';
+import Footer from '../Footer';
 
 interface LayoutProps {
     children: ReactNode;
@@ -6,8 +8,11 @@ interface LayoutProps {
 
 function Layout({ children }: LayoutProps) {
     return (
+
         <div className='flex flex-col justify-center'>
+            <Navbar />
             {children}
+            <Footer />
         </div>
     )
 }

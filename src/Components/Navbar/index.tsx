@@ -63,10 +63,10 @@ function Navbar() {
           </button>
 
           {/* Carrito contador */}
-          <h3 className='flex justify-center items-center px-0 md:px-2 text-xl'>
+          <NavLink to='/checkout-cart' className='flex justify-center items-center px-0 md:px-2 text-xl'>
             <ShoppingCartIcon className='size-6 my-2 hover:scale-125' />
             <span className='bg-rose-500 font-semibold rounded-full size-5 text-xs flex justify-center items-center mb-4'>{context.count}</span>
-          </h3>
+          </NavLink>
 
           {/* Dropdown menu */}
           <div

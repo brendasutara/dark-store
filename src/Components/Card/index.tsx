@@ -1,14 +1,10 @@
 import { useContext } from 'react'
 import { Product } from '../../Models/Products'
 import { ShoppingCartContext } from '../../Context'
-import { ShoppingCartIcon, HeartIcon } from '@heroicons/react/24/outline'
+import { HeartIcon } from '@heroicons/react/24/outline'
 
 function Card(data: Product) {
     const context = useContext(ShoppingCartContext)!;
-
-    const incrementCount = () => {
-        context.setCount(prevCount => prevCount + 1);
-    };
 
     const showProduct = (productDetail: Product) => {
         context.handleOpen();
@@ -31,10 +27,6 @@ function Card(data: Product) {
                 <p className='rounded-lg  opacity-60'>{data.category.name}</p>
                 <div className='relative flex items-center justify-between'>
                     <span className='text-3xl font-bold  '>${data.price}</span>
-                    <button onClick={incrementCount} className='absolute right-0 flex gap-x-2 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 md:px-3 md:py-1.5 lg:px-5 lg:py-2.5 text-center bg-rose-500 hover:bg-rose-600 focus:ring-rose-800'>
-                        <p className='hidden lg:block'>Add to cart</p>
-                        <ShoppingCartIcon className='size-6' />
-                    </button>
                 </div>
             </div>
         </div>

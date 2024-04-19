@@ -14,6 +14,8 @@ type ShoppingCartContextType = {
     handleClose: () => void,
     productToShow: Product[],
     setProductToShow: Dispatch<SetStateAction<Product[]>>,
+    cartProducts: Product[],
+    setCartProducts: Dispatch<SetStateAction<Product[]>>,
 };
 
 export const ShoppingCartContext = createContext<ShoppingCartContextType | null>(null);
@@ -24,6 +26,7 @@ export const ShoppingCartProvider: React.FC<Props> = ({ children }: Props) => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const [productToShow, setProductToShow] = useState<Product[]>([])
+    const [cartProducts, setCartProducts] = useState<Product[]>([])
 
     return (
         <ShoppingCartContext.Provider value={{
@@ -33,7 +36,9 @@ export const ShoppingCartProvider: React.FC<Props> = ({ children }: Props) => {
             handleOpen,
             handleClose,
             productToShow,
-            setProductToShow
+            setProductToShow,
+            cartProducts,
+            setCartProducts
         }}>
             {children}
         </ShoppingCartContext.Provider>

@@ -5,10 +5,10 @@ import MyOrder from '../MyOrder'
 import MyOrders from '../MyOrders'
 import NotFound from '../NotFound'
 import SignIn from '../SignIn'
-import Navbar from '../../Components/Navbar/index'
-import Footer from '../../Components/Footer'
 import ShoppingCartProvider from '../../Context'
 import './App.css'
+import CheckoutMenu from '../CheckoutMenu'
+
 
 const AppRoutes = () => {
   const routes = useRoutes([
@@ -17,6 +17,7 @@ const AppRoutes = () => {
     { path: '/my-order', element: <MyOrder /> },
     { path: '/my-orders', element: <MyOrders /> },
     { path: '/sign-in', element: <SignIn /> },
+    { path: '/checkout-cart', element: <CheckoutMenu /> },
     { path: '/*', element: <NotFound /> },
   ])
 
@@ -28,9 +29,7 @@ function App() {
     <>
       <ShoppingCartProvider>
         <BrowserRouter>
-          <Navbar />
           <AppRoutes />
-          <Footer />
         </BrowserRouter>
       </ShoppingCartProvider>
     </>
