@@ -11,6 +11,7 @@ import PlusIcon from '@heroicons/react/24/outline/PlusIcon';
 import MinusIcon from '@heroicons/react/24/outline/MinusIcon';
 import StarIcon from '@heroicons/react/24/solid/StarIcon';
 import Carrousel from '../Carrousel';
+import ModalCart from '../CheckoutSideMenu';
 
 
 export default function ModalUnstyled(data: Product) {
@@ -18,8 +19,14 @@ export default function ModalUnstyled(data: Product) {
 
     const [curr, setCurr] = React.useState(0);
 
-    const addProducts = (productData: Product) => {
-        context.setCount(prevCount => prevCount + 1);
+    const showProductCart = (productCart: Product) => {
+        context.handleClose();
+        context.handleOpenCart();
+        context.setCartProducts([productCart])
+    }
+
+    const addProductsToCart = (productData: Product) => {
+        context.setCount((prevCount) => prevCount + 1)
         context.setCartProducts([...context.cartProducts, productData])
     }
 
@@ -31,6 +38,8 @@ export default function ModalUnstyled(data: Product) {
                 open={context.open}
                 onClose={context.handleClose}
                 slots={{ backdrop: StyledBackdrop }}
+                openCart={context.openCart}
+                onCloseCart={context.handleCloseCart}
             >
                 <ModalContent sx={{ width: 1000 }}>
                     <section className='overflow-y-auto h-screen md:h-4/6 flex flex-col md:flex-row text-white'>
@@ -70,9 +79,9 @@ export default function ModalUnstyled(data: Product) {
                                     <div className='flex flex-col space-y-2'>
                                         <div className='uppercase font-extralight opacity-60 text-sm md:ml-1'>Quantity</div>
                                         <div className='flex justify-center items-center rounded-full p-2 bg-slate-900 gap-x-4'>
-                                            <PlusIcon className='bg-slate-800 hover:bg-slate-950 size-8 rounded-full p-1 cursor-pointer' />
-                                            <p>{context.count}</p>
                                             <MinusIcon className='bg-slate-800 hover:bg-slate-950 size-8 rounded-full p-1 cursor-pointer' />
+                                            <p>{context.count}</ p>
+                                            <PlusIcon className='bg-slate-800 hover:bg-slate-950 size-8 rounded-full p-1 cursor-pointer' />
                                         </div>
                                     </div>
                                 </div>
@@ -82,10 +91,10 @@ export default function ModalUnstyled(data: Product) {
                                     <p className='opacity-60 md:ml-1 text-pretty'>{context.productToShow[0]?.description}</p>
                                 </div>
                                 <div className='flex items-center gap-x-6'>
-                                    <button onClick={() => addProducts(data)} className='w-36 focus:ring-4 focus:outline-none font-medium rounded-md text-sm px-4 py-2 md:px-3 md:py-1.5 lg:px-5 lg:py-2.5 text-center border border-rose-400 hover:bg-rose-500 focus:ring-rose-800'>
+                                    <button onClick={() => addProductsToCart(data)} className='w-36 focus:ring-4 focus:outline-none font-medium rounded-md text-sm px-4 py-2 md:px-3 md:py-1.5 lg:px-5 lg:py-2.5 text-center border border-rose-400 hover:bg-rose-500 focus:ring-rose-800'>
                                         Add to cart
                                     </button>
-                                    <button className='w-36 focus:ring-4 focus:outline-none font-medium rounded-md text-sm px-4 py-2 md:px-3 md:py-1.5 lg:px-5 lg:py-2.5 text-center bg-rose-400 hover:bg-rose-500 focus:ring-rose-800'>
+                                    <button onClick={() => showProductCart(data)} className='w-36 focus:ring-4 focus:outline-none font-medium rounded-md text-sm px-4 py-2 md:px-3 md:py-1.5 lg:px-5 lg:py-2.5 text-center bg-rose-400 hover:bg-rose-500 focus:ring-rose-800'>
                                         Buy Now
                                     </button>
                                 </div>
@@ -96,6 +105,7 @@ export default function ModalUnstyled(data: Product) {
                     </section>
                 </ModalContent>
             </Modal>
+            <ModalCart />
         </div>
     );
 }

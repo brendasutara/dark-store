@@ -12,16 +12,16 @@ function Card(data: Product) {
     }
 
     return (
-        <div
-            className='hover:bg-slate-900 border-slate-800 flex-wrap gap-4 p-2 border justify-center items-center w-full max-w-sm rounded-lg shadow'>
-            <a className='cursor-pointer' onClick={() => showProduct(data)}>
+        <div onClick={() => showProduct(data)}
+            className='hover:bg-slate-900 border-slate-800 flex-wrap gap-4 p-2 cursor-pointer border justify-center items-center w-full max-w-sm rounded-lg shadow'>
+            <a>
                 <figure className='relative'>
                     <img className='rounded-lg' src={data.images[0]} alt='product image' />
                     <HeartIcon className='absolute right-0 top-0 size-6 m-4 hover:scale-125' />
                 </figure>
             </a>
             <div className='p-4 space-y-2'>
-                <a className='cursor-pointer' onClick={() => showProduct(data)}>
+                <a >
                     <h5 className='truncate uppercase text-xl font-semibold tracking-tight'>{data.title}</h5>
                 </a>
                 <p className='rounded-lg  opacity-60'>{data.category.name}</p>

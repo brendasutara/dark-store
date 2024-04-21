@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 function Footer() {
 
   return (
-    <footer className='w-full bottom-0 bg-slate-900 p-2'>
+    <footer className='w-full bg-slate-900 p-2'>
       <div className='flex-col md:flex-row items-center md:flex max-w-screen-xl flex flex-wrap md:items-start justify-between mx-auto py-4'>
         {/* logo */}
         <NavLink to='/' className='flex items-center rtl:space-x-reverse'>

@@ -16,6 +16,9 @@ type ShoppingCartContextType = {
     setProductToShow: Dispatch<SetStateAction<Product[]>>,
     cartProducts: Product[],
     setCartProducts: Dispatch<SetStateAction<Product[]>>,
+    openCart: boolean,
+    handleOpenCart: () => void,
+    handleCloseCart: () => void,
 };
 
 export const ShoppingCartContext = createContext<ShoppingCartContextType | null>(null);
@@ -25,8 +28,14 @@ export const ShoppingCartProvider: React.FC<Props> = ({ children }: Props) => {
     const [open, setOpen] = useState<boolean>(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const [productToShow, setProductToShow] = useState<Product[]>([])
-    const [cartProducts, setCartProducts] = useState<Product[]>([])
+    //Estado para mostrar el detalle del producto clickeado
+    const [productToShow, setProductToShow] = useState<Product[]>([]);
+    //Carrito donde vamos a guardar todos los productos
+    const [cartProducts, setCartProducts] = useState<Product[]>([]);
+
+    const [openCart, setOpenCart] = useState<boolean>(false);
+    const handleOpenCart = () => setOpenCart(true);
+    const handleCloseCart = () => setOpenCart(false);
 
     return (
         <ShoppingCartContext.Provider value={{
@@ -38,7 +47,10 @@ export const ShoppingCartProvider: React.FC<Props> = ({ children }: Props) => {
             productToShow,
             setProductToShow,
             cartProducts,
-            setCartProducts
+            setCartProducts,
+            openCart,
+            handleOpenCart,
+            handleCloseCart,
         }}>
             {children}
         </ShoppingCartContext.Provider>

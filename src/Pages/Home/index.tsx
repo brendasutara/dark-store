@@ -7,6 +7,7 @@ import { Product } from '../../Models/Products';
 import SecurePurchase from '../../Components/SecurePurchase';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import ModalUnstyled from '../../Components/ModalUnstyled';
+import Footer from '../../Components/Footer';
 
 function Home() {
   const [items, setItems] = useState<Product[]>([]);
@@ -67,6 +68,7 @@ function Home() {
         <ModalUnstyled />
         <SecurePurchase />
       </Layout>
+      <Footer />
     </div>
   );
 }
