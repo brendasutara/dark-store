@@ -19,7 +19,7 @@ function Home() {
         const response = await fetch(
           showAllProducts
             ? 'https://api.escuelajs.co/api/v1/products'
-            : 'https://api.escuelajs.co/api/v1/products?offset=8&limit=8'
+            : 'https://api.escuelajs.co/api/v1/products?offset=0&limit=8'
         );
         if (!response.ok) {
           throw new Error('Network response was not ok');

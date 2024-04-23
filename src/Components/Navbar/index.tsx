@@ -4,8 +4,11 @@ import { Collapse } from 'flowbite';
 import type { CollapseInterface } from 'flowbite';
 import { ShoppingCartContext } from '../../Context';
 import { ShoppingCartIcon } from '@heroicons/react/24/outline'
+import { Product } from '../../Models/Products';
 
-function Navbar() {
+function Navbar(data: Product) {
+  const context = useContext(ShoppingCartContext)!;
+
   const activeStyle = 'text-rose-300 rounded-lg font-medium';
   const userMenu = useRef<HTMLDivElement>(null);
   const userMenuCollapse = useRef<CollapseInterface | null>(null);
@@ -35,7 +38,11 @@ function Navbar() {
     }
   };
 
-  const context = useContext(ShoppingCartContext)!;
+  const showProductCart = (productCart: Product) => {
+    context.handleClose();
+    context.handleOpenCart();
+    context.setCartProducts([productCart])
+  }
 
   return (
     <nav className='fixed w-full top-0 z-20 border-b border-slate-800 bg-slate-950 p-2 md:p-4 lg:py-4 lg:px-0'>
@@ -63,10 +70,10 @@ function Navbar() {
           </button>
 
           {/* Carrito contador */}
-          <NavLink to='/checkout-cart' className='flex justify-center items-center px-0 md:px-2 text-xl'>
+          <div onClick={() => showProductCart(data)} className='flex justify-center items-center px-0 md:px-2 text-xl cursor-pointer'>
             <ShoppingCartIcon className='size-6 my-2 hover:scale-125' />
             <span className='bg-rose-500 font-semibold rounded-full size-5 text-xs flex justify-center items-center mb-4'>{context.count}</span>
-          </NavLink>
+          </div>
 
           {/* Dropdown menu */}
           <div

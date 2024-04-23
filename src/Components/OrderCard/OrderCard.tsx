@@ -2,12 +2,15 @@ import PlusIcon from '@heroicons/react/24/outline/PlusIcon';
 import MinusIcon from '@heroicons/react/24/outline/MinusIcon';
 import { Product } from '../../Models/Products';
 
-function OrderCard(props: Product) {
+export default function OrderCard(props: Product) {
     const { title, images, price } = props
 
     return (
         <div className='bg-slate-800 mx-auto layout md:h-4/6 flex flex-col md:flex-row text-white rounded-lg justify-between'>
-            <img className='w-auto h-36 object-cover rounded-lg' src={images[0]} />
+            {images && images.length > 0 && (
+                <img className='w-auto h-36 object-cover rounded-lg' src={images[0]} />
+            )}
+
             <div className='flex flex-col space-y-2'>
                 <div className='uppercase font-extralight opacity-60 text-sm md:ml-1'>Category</div>
                 <h2 className='text-xl'>{title}</h2>
@@ -31,5 +34,3 @@ function OrderCard(props: Product) {
         </div>
     )
 }
-
-export default OrderCard

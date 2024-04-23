@@ -24,10 +24,13 @@ type ShoppingCartContextType = {
 export const ShoppingCartContext = createContext<ShoppingCartContextType | null>(null);
 
 export const ShoppingCartProvider: React.FC<Props> = ({ children }: Props) => {
+
     const [count, setCount] = useState<number>(0);
+
     const [open, setOpen] = useState<boolean>(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
     //Estado para mostrar el detalle del producto clickeado
     const [productToShow, setProductToShow] = useState<Product[]>([]);
     //Carrito donde vamos a guardar todos los productos

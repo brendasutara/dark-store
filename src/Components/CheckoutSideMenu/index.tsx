@@ -5,10 +5,12 @@ import clsx from 'clsx';
 import { styled, css } from '@mui/system';
 import { Modal as BaseModal } from '@mui/base/Modal';
 import XMarkIcon from '@heroicons/react/24/outline/XMarkIcon';
+import OrderCard from '../OrderCard/OrderCard';
 
 
 export default function ModalCart() {
     const context = React.useContext(ShoppingCartContext)!;
+    console.log('CARRITO: ', context.cartProducts)
 
     return (
         <div>
@@ -20,15 +22,28 @@ export default function ModalCart() {
                 slots={{ backdrop: StyledBackdrop }}
             >
                 <ModalContent sx={{ width: 360 }}>
-                    <section className='overflow-y-auto h-screen flex flex-col md:flex-row text-white bg-slate-800  p-6'>
+                    <section className='overflow-y-auto h-screen flex flex-col text-white bg-slate-800  p-6'>
                         <div className='flex justify-between items-start w-full order-last md:order-none'>
                             <h3 className='text-xl'>My Order</h3>
                             <div onClick={context.handleCloseCart} className='flex justify-end'>
                                 <XMarkIcon className='rounded-full p-1 w-8 opacity-60 hover:opacity-100 hover:bg-white/10 cursor-pointer' />
                             </div>
                         </div>
-
-
+                        <div className='py-10'>
+                            {
+                                context.cartProducts.map((product) => (
+                                    <OrderCard
+                                        key={product.id} // Aquí asignamos una clave única utilizando product.id
+                                        title={product.title}
+                                        images={product.images}
+                                        price={product.price}
+                                        id={product.id} // Asegúrate de pasar todas las propiedades requeridas
+                                        description={product.description}
+                                        category={product.category}
+                                    />
+                                ))
+                            }
+                        </div>
                     </section>
                 </ModalContent>
             </Modal>

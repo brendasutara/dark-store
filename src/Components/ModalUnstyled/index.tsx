@@ -48,8 +48,6 @@ export default function ModalUnstyled(data: Product) {
                 open={context.open}
                 onClose={context.handleClose}
                 slots={{ backdrop: StyledBackdrop }}
-                openCart={context.openCart}
-                onCloseCart={context.handleCloseCart}
             >
                 <ModalContent sx={{ width: 1000 }}>
                     <section className='overflow-y-auto h-screen md:h-4/6 flex flex-col md:flex-row text-white'>
