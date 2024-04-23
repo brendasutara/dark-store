@@ -19,14 +19,16 @@ function Home() {
         const response = await fetch(
           showAllProducts
             ? 'https://api.escuelajs.co/api/v1/products'
-            : 'https://api.escuelajs.co/api/v1/products?offset=20&limit=8'
+            : 'https://api.escuelajs.co/api/v1/products?offset=8&limit=8'
         );
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
         const filteredData = data.filter((product: Product) => {
-          return !product.images.some((image) => image.includes('any'));
+          return !product.images.some((image) =>
+            image.includes('any') || image.includes('[&quot;')
+          );
         });
         setItems(filteredData);
       } catch (error) {
@@ -40,6 +42,7 @@ function Home() {
   const handleShowMoreClick = () => {
     setShowAllProducts(true);
   };
+
 
   return (
     <div>

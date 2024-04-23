@@ -26,8 +26,18 @@ export default function ModalUnstyled(data: Product) {
     }
 
     const addProductsToCart = (productData: Product) => {
-        context.setCount((prevCount) => prevCount + 1)
-        context.setCartProducts([...context.cartProducts, productData])
+        if (context.count < 20) {
+            context.setCount((prevCount) => prevCount + 1)
+            context.setCartProducts([...context.cartProducts, productData])
+        }
+    }
+
+    const removeProductsToCart = (productData: Product) => {
+        if (context.count > 0) {
+            context.setCount((prevCount) => prevCount - 1)
+            const updatedCart = context.cartProducts.filter(product => product.id !== productData.id);
+            context.setCartProducts(updatedCart);
+        }
     }
 
     return (
@@ -79,11 +89,19 @@ export default function ModalUnstyled(data: Product) {
                                     <div className='flex flex-col space-y-2'>
                                         <div className='uppercase font-extralight opacity-60 text-sm md:ml-1'>Quantity</div>
                                         <div className='flex justify-center items-center rounded-full p-2 bg-slate-900 gap-x-4'>
-                                            <MinusIcon className='bg-slate-800 hover:bg-slate-950 size-8 rounded-full p-1 cursor-pointer' />
+                                            <MinusIcon onClick={() => removeProductsToCart(data)} className='bg-slate-800 hover:bg-slate-950 size-8 rounded-full p-1 cursor-pointer' />
                                             <p>{context.count}</ p>
-                                            <PlusIcon className='bg-slate-800 hover:bg-slate-950 size-8 rounded-full p-1 cursor-pointer' />
+                                            <PlusIcon onClick={() => addProductsToCart(data)} className='bg-slate-800 hover:bg-slate-950 size-8 rounded-full p-1 cursor-pointer' />
                                         </div>
                                     </div>
+                                    {
+                                        (context.count > 1) && (
+                                            <div className='flex flex-col space-y-2'>
+                                                <div className='uppercase font-extralight opacity-60 text-sm md:ml-1'>Total</div>
+                                                <h2 className='text-5xl font-thin text-rose-400'>${context.productToShow[0]?.price * context.count}</h2>
+                                            </div>
+                                        )
+                                    }
                                 </div>
                                 <div className='space-y-2'>
                                     <div className='uppercase font-extralight opacity-60 text-sm md:ml-1'>Description</div>
