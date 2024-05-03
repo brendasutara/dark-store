@@ -6,7 +6,6 @@ import Layout from '../../Components/Layout';
 import { Product } from '../../Models/Products';
 import SecurePurchase from '../../Components/SecurePurchase';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
-import ModalUnstyled from '../../Components/ModalUnstyled';
 import Footer from '../../Components/Footer';
 
 function Home() {
@@ -19,7 +18,7 @@ function Home() {
         const response = await fetch(
           showAllProducts
             ? 'https://api.escuelajs.co/api/v1/products'
-            : 'https://api.escuelajs.co/api/v1/products?offset=0&limit=8'
+            : 'https://api.escuelajs.co/api/v1/products?offset=8&limit=8'
         );
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -68,7 +67,6 @@ function Home() {
             </button>
           </div>
         )}
-        <ModalUnstyled />
         <SecurePurchase />
       </Layout>
       <Footer />

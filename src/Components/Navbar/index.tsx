@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState, MouseEvent } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Collapse } from 'flowbite';
 import type { CollapseInterface } from 'flowbite';
@@ -38,11 +38,22 @@ function Navbar(data: Product) {
     }
   };
 
-  const showProductCart = (productCart: Product) => {
-    context.handleClose();
-    context.handleOpenCart();
-    context.setCartProducts([productCart])
+  // const showProductCart = (productCart: Product) => {
+  //   context.handleClose();
+  //   context.handleOpenCart();
+  //   context.setCartProducts([productCart])
+  // }
+
+  const addProductsToCart = (event: MouseEvent<HTMLDivElement>, productData: Product) => {
+    event.stopPropagation()
+    if (context.count < 20) {
+      context.setCount((prevCount) => prevCount + 1)
+      context.setCartProducts([...context.cartProducts, productData])
+    }
+    context.handleOpenCart()
+    console.log('CART IN CARD: ', context.cartProducts)
   }
+
 
   return (
     <nav className='fixed w-full top-0 z-20 border-b border-slate-800 bg-slate-950 p-2 md:p-4 lg:py-4 lg:px-0'>
@@ -70,7 +81,7 @@ function Navbar(data: Product) {
           </button>
 
           {/* Carrito contador */}
-          <div onClick={() => showProductCart(data)} className='flex justify-center items-center px-0 md:px-2 text-xl cursor-pointer'>
+          <div onClick={(event) => addProductsToCart(event, data)} className='flex justify-center items-center px-0 md:px-2 text-xl cursor-pointer'>
             <ShoppingCartIcon className='size-6 my-2 hover:scale-125' />
             <span className='bg-rose-500 font-semibold rounded-full size-5 text-xs flex justify-center items-center mb-4'>{context.count}</span>
           </div>
@@ -150,6 +161,11 @@ function Navbar(data: Product) {
             <li className='rounded-lg p-2 hover:bg-slate-800'>
               <NavLink to='/shoes' className={({ isActive }) => (isActive ? activeStyle : undefined)}>
                 Shoes
+              </NavLink>
+            </li>
+            <li className='rounded-lg p-2 hover:bg-slate-800'>
+              <NavLink to='/toys' className={({ isActive }) => (isActive ? activeStyle : undefined)}>
+                Toys
               </NavLink>
             </li>
             <li className='rounded-lg p-2 hover:bg-slate-800'>

@@ -7,11 +7,14 @@ import NotFound from '../NotFound'
 import SignIn from '../SignIn'
 import ShoppingCartProvider from '../../Context'
 import './App.css'
+import ModalCart from '../../Components/CheckoutSideMenu'
+import ModalUnstyled from '../../Components/ModalUnstyled'
 
 
 const AppRoutes = () => {
   const routes = useRoutes([
     { path: '/', element: <Home /> },
+    { path: "/:category", element: <Home /> },
     { path: '/my-account', element: <MyAccount /> },
     { path: '/my-order', element: <MyOrder /> },
     { path: '/my-orders', element: <MyOrders /> },
@@ -28,6 +31,8 @@ function App() {
       <ShoppingCartProvider>
         <BrowserRouter>
           <AppRoutes />
+          <ModalUnstyled />
+          <ModalCart />
         </BrowserRouter>
       </ShoppingCartProvider>
     </>

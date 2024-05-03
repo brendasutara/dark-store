@@ -1,35 +1,36 @@
-import * as React from 'react';
+import { forwardRef, useContext, useState, MouseEvent } from 'react';
 import { ShoppingCartContext } from '../../Context';
 import { Product } from '../../Models/Products';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { styled, css } from '@mui/system';
 import { Modal as BaseModal } from '@mui/base/Modal';
-import ChevronRightIcon from '@heroicons/react/24/outline/ChevronRightIcon';
-import XMarkIcon from '@heroicons/react/24/outline/XMarkIcon';
-import PlusIcon from '@heroicons/react/24/outline/PlusIcon';
-import MinusIcon from '@heroicons/react/24/outline/MinusIcon';
+import { XMarkIcon, PlusIcon, MinusIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import StarIcon from '@heroicons/react/24/solid/StarIcon';
 import Carrousel from '../Carrousel';
 import ModalCart from '../CheckoutSideMenu';
+import PropTypes from 'prop-types';
+import clsx from 'clsx';
+import { styled, css } from '@mui/system';
+
 
 
 export default function ModalUnstyled(data: Product) {
-    const context = React.useContext(ShoppingCartContext)!;
+    const context = useContext(ShoppingCartContext)!;
 
-    const [curr, setCurr] = React.useState(0);
+    const [curr, setCurr] = useState(0);
 
-    const showProductCart = (productCart: Product) => {
+    const showProductCart = () => {
         context.handleClose();
         context.handleOpenCart();
-        context.setCartProducts([productCart])
+
     }
 
-    const addProductsToCart = (productData: Product) => {
+    const addProductsToCart = (event: MouseEvent<HTMLButtonElement>, productData: Product) => {
+        event.stopPropagation()
         if (context.count < 20) {
             context.setCount((prevCount) => prevCount + 1)
             context.setCartProducts([...context.cartProducts, productData])
         }
+        context.handleClose()
+        context.handleOpenCart()
     }
 
     const removeProductsToCart = (productData: Product) => {
@@ -89,7 +90,7 @@ export default function ModalUnstyled(data: Product) {
                                         <div className='flex justify-center items-center rounded-full p-2 bg-slate-900 gap-x-4'>
                                             <MinusIcon onClick={() => removeProductsToCart(data)} className='bg-slate-800 hover:bg-slate-950 size-8 rounded-full p-1 cursor-pointer' />
                                             <p>{context.count}</ p>
-                                            <PlusIcon onClick={() => addProductsToCart(data)} className='bg-slate-800 hover:bg-slate-950 size-8 rounded-full p-1 cursor-pointer' />
+                                            <PlusIcon className='bg-slate-800 hover:bg-slate-950 size-8 rounded-full p-1 cursor-pointer' />
                                         </div>
                                     </div>
                                     {
@@ -107,10 +108,10 @@ export default function ModalUnstyled(data: Product) {
                                     <p className='opacity-60 md:ml-1 text-pretty'>{context.productToShow[0]?.description}</p>
                                 </div>
                                 <div className='flex items-center gap-x-6'>
-                                    <button onClick={() => addProductsToCart(data)} className='w-36 focus:ring-4 focus:outline-none font-medium rounded-md text-sm px-4 py-2 md:px-3 md:py-1.5 lg:px-5 lg:py-2.5 text-center border border-rose-400 hover:bg-rose-500 focus:ring-rose-800'>
+                                    <button onClick={(event) => addProductsToCart(event, data)} className='w-36 focus:ring-4 focus:outline-none font-medium rounded-md text-sm px-4 py-2 md:px-3 md:py-1.5 lg:px-5 lg:py-2.5 text-center border border-rose-400 hover:bg-rose-500 focus:ring-rose-800'>
                                         Add to cart
                                     </button>
-                                    <button onClick={() => showProductCart(data)} className='w-36 focus:ring-4 focus:outline-none font-medium rounded-md text-sm px-4 py-2 md:px-3 md:py-1.5 lg:px-5 lg:py-2.5 text-center bg-rose-400 hover:bg-rose-500 focus:ring-rose-800'>
+                                    <button onClick={() => showProductCart()} className='w-36 focus:ring-4 focus:outline-none font-medium rounded-md text-sm px-4 py-2 md:px-3 md:py-1.5 lg:px-5 lg:py-2.5 text-center bg-rose-400 hover:bg-rose-500 focus:ring-rose-800'>
                                         Buy Now
                                     </button>
                                 </div>
@@ -126,7 +127,7 @@ export default function ModalUnstyled(data: Product) {
     );
 }
 
-const Backdrop = React.forwardRef<HTMLDivElement, { open?: boolean; className?: string }>((props, ref) => {
+const Backdrop = forwardRef<HTMLDivElement, { open?: boolean; className?: string }>((props, ref) => {
     const { open, className, ...other } = props;
     return (
         <div

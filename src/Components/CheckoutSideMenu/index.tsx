@@ -10,7 +10,6 @@ import OrderCard from '../OrderCard/OrderCard';
 
 export default function ModalCart() {
     const context = React.useContext(ShoppingCartContext)!;
-    console.log('CARRITO: ', context.cartProducts)
 
     return (
         <div>
@@ -22,14 +21,14 @@ export default function ModalCart() {
                 slots={{ backdrop: StyledBackdrop }}
             >
                 <ModalContent sx={{ width: 360 }}>
-                    <section className='overflow-y-auto h-screen flex flex-col text-white bg-slate-800  p-6'>
-                        <div className='flex justify-between items-start w-full order-last md:order-none'>
+                    <section className='overflow-y-auto h-screen flex flex-col text-white bg-slate-800 p-6'>
+                        <div className='flex justify-between items-start w-full pb-4'>
                             <h3 className='text-xl'>My Order</h3>
                             <div onClick={context.handleCloseCart} className='flex justify-end'>
                                 <XMarkIcon className='rounded-full p-1 w-8 opacity-60 hover:opacity-100 hover:bg-white/10 cursor-pointer' />
                             </div>
                         </div>
-                        <div className='py-10'>
+                        <div className='py-10 overflow-y-auto'>
                             {
                                 context.cartProducts.map((product) => (
                                     <OrderCard
@@ -45,6 +44,10 @@ export default function ModalCart() {
                             }
                         </div>
                     </section>
+                    <div className='flex justify-between items-center bg-slate-800 w-[360px] h-10 absolute bottom-0 border-t border-slate-500 p-6'>
+                        <h2 className='uppercase text-pretty text-sm opacity-85'>Total</h2>
+                        <h2 className='text-2xl font-bold text-rose-400'>$540</h2>
+                    </div>
                 </ModalContent>
             </Modal>
         </div>

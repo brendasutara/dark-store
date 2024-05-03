@@ -15,7 +15,7 @@ function Carrousel({ slides, curr, setCurr }: CarrouselProps) {
       <div className="overflow-hidden relative h-full">
         <div className="flex h-full transition-transform ease-out duration-500" style={{ transform: `translateX(-${curr * 100}%)` }}>
           {slides.map((slide, index) => (
-            <img key={index} className='object-cover rounded-lg h-full w-full' src={slide} alt="" />
+            <img key={index} className='object-cover rounded-lg h-auto w-screen' src={slide} alt="" />
           ))}
         </div>
       </div>

@@ -1,36 +1,20 @@
-import PlusIcon from '@heroicons/react/24/outline/PlusIcon';
-import MinusIcon from '@heroicons/react/24/outline/MinusIcon';
+import { TrashIcon } from '@heroicons/react/24/outline';
 import { Product } from '../../Models/Products';
 
 export default function OrderCard(props: Product) {
     const { title, images, price } = props
 
     return (
-        <div className='bg-slate-800 mx-auto layout md:h-4/6 flex flex-col md:flex-row text-white rounded-lg justify-between'>
+        <div className='flex bg-slate-700 shadow-lg shadow-black/40 mx-auto rounded-lg justify-between items-center p-2 mb-4 space-x-4'>
             {images && images.length > 0 && (
-                <img className='w-auto h-36 object-cover rounded-lg' src={images[0]} />
+                <img className='h-full w-20 object-cover rounded-lg' src={images[0]} />
             )}
+            <h2 className='text-pretty text-sm opacity-85'>{title}</h2>
+            <h2 className='text-2xl font-bold text-rose-400'>${price}</h2>
+            <div>
+                <TrashIcon className='cursor-pointer w-4 opacity-65 hover:opacity-100' />
+            </div>
 
-            <div className='flex flex-col space-y-2'>
-                <div className='uppercase font-extralight opacity-60 text-sm md:ml-1'>Category</div>
-                <h2 className='text-xl'>{title}</h2>
-            </div>
-            <div className='flex flex-col space-y-2'>
-                <div className='uppercase font-extralight opacity-60 text-sm md:ml-1'>Price</div>
-                <h2 className='text-5xl font-thin text-rose-400'>${price}</h2>
-            </div>
-            <div className='flex flex-col space-y-2'>
-                <div className='uppercase font-extralight opacity-60 text-sm md:ml-1'>Quantity</div>
-                <div className='flex justify-center items-center rounded-full p-2 bg-slate-900 gap-x-4'>
-                    <MinusIcon className='bg-slate-800 hover:bg-slate-950 size-8 rounded-full p-1 cursor-pointer' />
-                    <p>5</p>
-                    <PlusIcon className='bg-slate-800 hover:bg-slate-950 size-8 rounded-full p-1 cursor-pointer' />
-                </div>
-            </div>
-            <div className='flex flex-col space-y-2'>
-                <div className='uppercase font-extralight opacity-60 text-sm md:ml-1'>Total</div>
-                <h2 className='text-5xl font-thin text-rose-400'>${price}</h2>
-            </div>
         </div>
     )
 }
