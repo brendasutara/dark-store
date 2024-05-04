@@ -83,7 +83,7 @@ function Navbar(data: Product) {
           {/* Carrito contador */}
           <div onClick={(event) => addProductsToCart(event, data)} className='flex justify-center items-center px-0 md:px-2 text-xl cursor-pointer'>
             <ShoppingCartIcon className='size-6 my-2 hover:scale-125' />
-            <span className='bg-rose-500 font-semibold rounded-full size-5 text-xs flex justify-center items-center mb-4'>{context.count}</span>
+            <span className='bg-rose-500 font-semibold rounded-full size-5 text-xs flex justify-center items-center mb-4'>{context.cartProducts.length}</span>
           </div>
 
           {/* Dropdown menu */}

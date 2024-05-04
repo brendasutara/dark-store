@@ -6,10 +6,16 @@ import { styled, css } from '@mui/system';
 import { Modal as BaseModal } from '@mui/base/Modal';
 import XMarkIcon from '@heroicons/react/24/outline/XMarkIcon';
 import OrderCard from '../OrderCard/OrderCard';
+import { totalPrice } from '../../utils';
 
 
 export default function ModalCart() {
     const context = React.useContext(ShoppingCartContext)!;
+
+    const handleDelete = (id: number) => {
+        const filteredProducts = context.cartProducts.filter(product => product.id != id)
+        context.setCartProducts(filteredProducts)
+    }
 
     return (
         <div>
@@ -32,21 +38,28 @@ export default function ModalCart() {
                             {
                                 context.cartProducts.map((product) => (
                                     <OrderCard
-                                        key={product.id} // Aquí asignamos una clave única utilizando product.id
+                                        id={product.id}
+                                        key={product.id}
                                         title={product.title}
                                         images={product.images}
                                         price={product.price}
-                                        id={product.id} // Asegúrate de pasar todas las propiedades requeridas
                                         description={product.description}
                                         category={product.category}
+                                        handleDelete={handleDelete}
                                     />
                                 ))
                             }
                         </div>
                     </section>
-                    <div className='flex justify-between items-center bg-slate-800 w-[360px] h-10 absolute bottom-0 border-t border-slate-500 p-6'>
-                        <h2 className='uppercase text-pretty text-sm opacity-85'>Total</h2>
-                        <h2 className='text-2xl font-bold text-rose-400'>$540</h2>
+                    <div className='bg-slate-800 w-[360px] h-10 absolute bottom-14 border-t border-slate-500 px-6 py-2 space-y-1'>
+                        <div className='flex justify-between items-center'>
+                            <h2 className='uppercase text-pretty text-sm opacity-85'>Total</h2>
+                            <h2 className='text-2xl font-bold text-rose-400'>${totalPrice(context.cartProducts)}</h2>
+                        </div>
+
+                        <button className='w-full focus:ring-4 focus:outline-none font-medium rounded-md text-sm px-4 py-2 md:px-3 md:py-1.5 lg:px-5 lg:py-2.5 text-center bg-rose-400 hover:bg-rose-500 focus:ring-rose-800'>
+                            Checkout
+                        </button>
                     </div>
                 </ModalContent>
             </Modal>
