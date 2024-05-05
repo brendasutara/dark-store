@@ -18,7 +18,6 @@ function Card(data: Product) {
             context.setCartProducts([...context.cartProducts, productData])
         }
         context.handleOpenCart()
-        console.log('CART IN CARD: ', context.cartProducts)
     }
 
     const renderIcon = (id: number) => {

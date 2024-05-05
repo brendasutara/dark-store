@@ -1,47 +1,52 @@
-import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import Card from '../../Components/Card';
 import Categories from '../../Components/Categories';
 import Header from '../../Components/Header';
 import Layout from '../../Components/Layout';
-import { Product } from '../../Models/Products';
 import SecurePurchase from '../../Components/SecurePurchase';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import Footer from '../../Components/Footer';
+import { ShoppingCartContext } from '../../Context';
 
 function Home() {
-  const [items, setItems] = useState<Product[]>([]);
-  const [showAllProducts, setShowAllProducts] = useState<boolean>(false);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch(
-          showAllProducts
-            ? 'https://api.escuelajs.co/api/v1/products'
-            : 'https://api.escuelajs.co/api/v1/products?offset=8&limit=8'
-        );
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        const filteredData = data.filter((product: Product) => {
-          return !product.images.some((image) =>
-            image.includes('any') || image.includes('[&quot;')
-          );
-        });
-        setItems(filteredData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchProducts();
-  }, [showAllProducts]);
+  const context = useContext(ShoppingCartContext)!;
 
   const handleShowMoreClick = () => {
-    setShowAllProducts(true);
+    context.setShowAllProducts(true);
   };
 
+  const renderView = () => {
+    if (context.searchValue?.length > 0) {
+      if (context.filteredItems?.length > 0) {
+        return (
+          <div className='flex pb-10 flex-col md:grid md:grid-cols-3 lg:grid lg:grid-cols-4 mx-auto items-center w-4/5 justify-center gap-4 md:gap-6  lg:gap-10'>
+            {context.filteredItems?.map((item) => {
+              return <Card key={item.id} {...item} />;
+            })}
+          </div>
+
+        )
+      } else {
+        return (
+          <div className='flex flex-col justify-center items-center space-x-2 mx-auto py-28'>
+            <img className='w-28 ' src="https://cdn-icons-png.flaticon.com/512/12870/12870689.png" alt="no results" />
+            <h2 className='text-center text-3xl opacity-60 py-6'>No Result Found</h2>
+            <p className='text-center text-xl opacity-60'>We can't find any item matching your search</p>
+          </div>
+        )
+      }
+
+    } else {
+      return (
+        <div className='flex pb-10 flex-col md:grid md:grid-cols-3 lg:grid lg:grid-cols-4 mx-auto items-center w-4/5 justify-center gap-4 md:gap-6  lg:gap-10'>
+          {context.items?.map((item) => {
+            return <Card key={item.id} {...item} />;
+          })}
+        </div>
+
+      )
+    }
+  }
 
   return (
     <div>
@@ -49,14 +54,10 @@ function Home() {
         <Header />
         <Categories />
         <h2 className='text-center text-3xl opacity-60 py-6'>
-          {showAllProducts ? 'All Products' : 'Featured Products'}
+          {context.showAllProducts ? 'All Products' : 'Featured Products'}
         </h2>
-        <div className='flex pb-10 flex-col md:grid md:grid-cols-3 lg:grid lg:grid-cols-4 mx-auto items-center w-4/5 justify-center gap-4 md:gap-6  lg:gap-10'>
-          {items?.map((item) => {
-            return <Card key={item.id} {...item} />;
-          })}
-        </div>
-        {!showAllProducts && (
+        {renderView()}
+        {!context.showAllProducts && (
           <div className='flex justify-center pb-4'>
             <button
               onClick={handleShowMoreClick}
