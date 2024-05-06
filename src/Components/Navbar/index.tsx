@@ -146,37 +146,57 @@ function Navbar() {
         <div className='items-center justify-between hidden w-full md:flex md:w-auto lg:order-1 md:order-last md:pt-2 lg:p-0' id='navbar-user'>
           <ul className='flex flex-col uppercase font-base p-4 md:p-0 mt-4 border rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 bg-slate-950  border-slate-700'>
             <li className='rounded-lg p-2 hover:bg-slate-800'>
-              <NavLink to='/' className={({ isActive }) => isActive ? activeStyle : undefined}>
+              <NavLink
+                to='/'
+                className={({ isActive }) => isActive ? activeStyle : undefined}>
                 All
               </NavLink>
             </li>
             <li className='rounded-lg p-2 hover:bg-slate-800'>
-              <NavLink to='/clothes' className={({ isActive }) => (isActive ? activeStyle : undefined)}>
+              <NavLink
+                to='/clothes'
+                onClick={() => context.setSearchByCategory('Clothes')}
+                className={({ isActive }) => (isActive ? activeStyle : undefined)}>
                 Clothes
               </NavLink>
             </li>
             <li className='rounded-lg p-2 hover:bg-slate-800'>
-              <NavLink to='/electronics' className={({ isActive }) => (isActive ? activeStyle : undefined)}>
+              <NavLink
+                to='/electronics'
+                onClick={() => context.setSearchByCategory('Electronics')}
+                className={({ isActive }) => (isActive ? activeStyle : undefined)}>
                 Electronics
               </NavLink>
             </li>
             <li className='rounded-lg p-2 hover:bg-slate-800'>
-              <NavLink to='/furniture' className={({ isActive }) => (isActive ? activeStyle : undefined)}>
+              <NavLink
+                to='/furniture'
+                onClick={() => context.setSearchByCategory('Furniture')}
+                className={({ isActive }) => (isActive ? activeStyle : undefined)}>
                 Furniture
               </NavLink>
             </li>
             <li className='rounded-lg p-2 hover:bg-slate-800'>
-              <NavLink to='/shoes' className={({ isActive }) => (isActive ? activeStyle : undefined)}>
+              <NavLink
+                to='/shoes'
+                onClick={() => context.setSearchByCategory('Shoes')}
+                className={({ isActive }) => (isActive ? activeStyle : undefined)}>
                 Shoes
               </NavLink>
             </li>
             <li className='rounded-lg p-2 hover:bg-slate-800'>
-              <NavLink to='/toys' className={({ isActive }) => (isActive ? activeStyle : undefined)}>
+              <NavLink
+                to='/toys'
+                onClick={() => context.setSearchByCategory('Toys')}
+                className={({ isActive }) => (isActive ? activeStyle : undefined)}>
                 Toys
               </NavLink>
             </li>
             <li className='rounded-lg p-2 hover:bg-slate-800'>
-              <NavLink to='/miscellaneous' className={({ isActive }) => (isActive ? activeStyle : undefined)}>
+              <NavLink
+                to='/miscellaneous'
+                onClick={() => context.setSearchByCategory('Miscellaneous')}
+                className={({ isActive }) => (isActive ? activeStyle : undefined)}>
                 Miscellaneous
               </NavLink>
             </li>

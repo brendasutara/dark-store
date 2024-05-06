@@ -16,36 +16,25 @@ function Home() {
   };
 
   const renderView = () => {
-    if (context.searchValue?.length > 0) {
-      if (context.filteredItems?.length > 0) {
-        return (
-          <div className='flex pb-10 flex-col md:grid md:grid-cols-3 lg:grid lg:grid-cols-4 mx-auto items-center w-4/5 justify-center gap-4 md:gap-6  lg:gap-10'>
-            {context.filteredItems?.map((item) => {
-              return <Card key={item.id} {...item} />;
-            })}
-          </div>
-
-        )
-      } else {
-        return (
-          <div className='flex flex-col justify-center items-center space-x-2 mx-auto py-28'>
-            <img className='w-28 ' src="https://cdn-icons-png.flaticon.com/512/12870/12870689.png" alt="no results" />
-            <h2 className='text-center text-3xl opacity-60 py-6'>No Result Found</h2>
-            <p className='text-center text-xl opacity-60'>We can't find any item matching your search</p>
-          </div>
-        )
-      }
-
-    } else {
+    if (context.filteredItems?.length > 0) {
       return (
         <div className='flex pb-10 flex-col md:grid md:grid-cols-3 lg:grid lg:grid-cols-4 mx-auto items-center w-4/5 justify-center gap-4 md:gap-6  lg:gap-10'>
-          {context.items?.map((item) => {
+          {context.filteredItems?.map((item) => {
             return <Card key={item.id} {...item} />;
           })}
         </div>
 
       )
+    } else {
+      return (
+        <div className='flex flex-col justify-center items-center space-x-2 mx-auto py-28'>
+          <img className='w-28 ' src="https://cdn-icons-png.flaticon.com/512/12870/12870689.png" alt="no results" />
+          <h2 className='text-center text-3xl opacity-60 py-6'>No Result Found</h2>
+          <p className='text-center text-xl opacity-60'>We can't find any item matching your search</p>
+        </div>
+      )
     }
+
   }
 
   return (
